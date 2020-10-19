@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"veritas0505yg.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="整理学习python在地理空间分析中的应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python地理空间分析指南笔记">
+<meta property="og:url" content="https://veritas0505yg.github.io/2020/10/19/python%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Veritas的部落格">
+<meta property="og:description" content="整理学习python在地理空间分析中的应用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-19T07:14:14.000Z">
+<meta property="article:modified_time" content="2020-10-19T12:21:42.990Z">
+<meta property="article:author" content="Veritas Yv">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://veritas0505yg.github.io/2020/10/19/python%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python地理空间分析指南笔记 | Veritas的部落格</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Veritas的部落格</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Less is more</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home  //首页 fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user  //关于 fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  //标签 fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th   //分类 fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive //归档 fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="sitemap   //站点地图 fa-fw"></i>站点地图</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://veritas0505yg.github.io/2020/10/19/python%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.newton.com.tw/img/f/c45/nBnaugDNmhDOzUjNwgTYjV2NmJ2MzUGOkdTN4IjZiZ2M0MTN4MDMxMWN3M2LtVGdp9yYpB3LltWahJ2Lt92YuUHZpFmYuMmczdWbp9yL6MHc0RHa.jpg">
+      <meta itemprop="name" content="Veritas Yv">
+      <meta itemprop="description" content="Unus pro omnibus, omnes pro uno">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Veritas的部落格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python地理空间分析指南笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-10-19 15:14:14 / 修改时间：20:21:42" itemprop="dateCreated datePublished" datetime="2020-10-19T15:14:14+08:00">2020-10-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">整理学习python在地理空间分析中的应用</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="python地理空间分析指南"><a href="#python地理空间分析指南" class="headerlink" title="python地理空间分析指南"></a><strong>python地理空间分析指南</strong></h2><h2 id="第一章-python与地理空间分析"><a href="#第一章-python与地理空间分析" class="headerlink" title="第一章 python与地理空间分析"></a><strong>第一章 python与地理空间分析</strong></h2><h3 id="1-1地理空间分析与我们的生活"><a href="#1-1地理空间分析与我们的生活" class="headerlink" title="1.1地理空间分析与我们的生活"></a><strong>1.1地理空间分析与我们的生活</strong></h3><p>Ushahidi软件实现有限设施报告农村地区埃博拉病毒新感染病例，确定疫情爆发范围，让政府确定资源和医疗用品的分配的优先级，让政府跟踪疫情状况。</p>
+<p>地理空间救灾程序是比较突出的案例之一，2004年，美劳工部宣称，地理信息产业作为13个高增长的行业之一，预计未来几十年为美国创造数百万个就业岗位</p>
+<p>地理空间分析几乎覆盖了所有工业领域，如房地产、石油天然气、农业、国防、政治、公共卫生、交通、海洋学等。</p>
+<p><a target="_blank" rel="noopener" href="http://geospatialrevolution.psu.edu/">http://geospatialrevolution.psu.edu</a></p>
+<hr>
+<h3 id="1-2地理空间分析的历史"><a href="#1-2地理空间分析的历史" class="headerlink" title="1.2地理空间分析的历史"></a><strong>1.2地理空间分析的历史</strong></h3><hr>
+<h3 id="1-3地理信息系统"><a href="#1-3地理信息系统" class="headerlink" title="1.3地理信息系统"></a><strong>1.3地理信息系统</strong></h3><hr>
+<p>加拿大国家地理信息系统（CGIS）包含了以下功能：地图投影变换、塑料板片扫描、地图缩放、线条平滑并减少了特征点的生成数量，多边形缺口自动封闭、面积计算、多边形合并、缓冲区分析、多边形创建、数据扫描等</p>
+<p>SYMAP带动了GRID、Odessey两个项目的发展，GRID是基于栅格的GIS系统，它使用栅格单元代替几何图形表示地理要素，后来发展成IMGRID。Odessey包括了很多高级地理空间数据管理功能。</p>
+<hr>
+<h3 id="1-4遥感"><a href="#1-4遥感" class="headerlink" title="1.4遥感"></a><strong>1.4遥感</strong></h3><hr>
+<h3 id="1-5高程数据"><a href="#1-5高程数据" class="headerlink" title="1.5高程数据"></a><strong>1.5高程数据</strong></h3><hr>
+<h3 id="1-6计算机辅助制图"><a href="#1-6计算机辅助制图" class="headerlink" title="1.6计算机辅助制图"></a><strong>1.6计算机辅助制图</strong></h3><p>GIS软件与CAD软件兼容性越来愈高</p>
+<hr>
+<h3 id="1-7地理空间分析和计算机编程"><a href="#1-7地理空间分析和计算机编程" class="headerlink" title="1.7地理空间分析和计算机编程"></a><strong>1.7地理空间分析和计算机编程</strong></h3><hr>
+<h4 id="1-7-1地理空间分析的面向对象编程"><a href="#1-7-1地理空间分析的面向对象编程" class="headerlink" title="1.7.1地理空间分析的面向对象编程"></a><strong>1.7.1地理空间分析的面向对象编程</strong></h4><p>pythyon语言可以用来设计良好的面向对象编程语言，也可以是过程式脚本语言、甚至可以是函数式编程语言，python进行面向对象编程，所有原生数据都是对象，并且python库是模块化的，遵循基本对象的结构和行为。</p>
+<p>地理空间分析需要面向对象编程</p>
+<hr>
+<h3 id="1-8地理空间分析的重要性"><a href="#1-8地理空间分析的重要性" class="headerlink" title="1.8地理空间分析的重要性"></a><strong>1.8地理空间分析的重要性</strong></h3><p><font face="黑体" color=#0099ff size=3>地理空间分析可以更好地辅助我们进行决策。</font></p>
+<p><span style="color:#0099ff;">Google earth用户可以创建个性化的KML文件，KML是一种基于XML语法与格式的、用于描述和保存（如点、线、图像、多边形和模型等）的编码规范。该软件通常被称作地理空间浏览工具，因为浏览数据是它的强项，但是数据分析功能很有限</span></p>
+<hr>
+<h3 id="1-9地理信息系统的基本概念"><a href="#1-9地理信息系统的基本概念" class="headerlink" title="1.9地理信息系统的基本概念"></a><strong>1.9地理信息系统的基本概念</strong></h3><h4 id="1-9-1专题地图"><a href="#1-9-1专题地图" class="headerlink" title="1.9.1专题地图"></a><strong>1.9.1专题地图</strong></h4><p>用于表达某些特定主题的地图称为专题地图。</p>
+<hr>
+<h4 id="1-9-2空间数据库"><a href="#1-9-2空间数据库" class="headerlink" title="1.9.2空间数据库"></a><strong>1.9.2空间数据库</strong></h4><p>数据库管理系统（DBMS）是能与数据库交互的软件，数据库通常包含字母和数字类型的数据，在某些情况下还包括二进制大对象或blobs，例如它们能将图片以二进制格式存储。大部分数据库还支持关系型数据库结构，规范化的表之间可以互相引用来创建一对多和多对多的关系。</p>
+<p><span style="color:#0099ff;">地理空间数据库是通过特定软件扩展了普通关系型数据库管理系统的功能（RDBMS）,这样就可以达到存储和查询二维、三维空间数据的目的。其中某些系统还能记录数据的时间序列。在空间数据库中，地理特征的属性可以像普通关系型数据库那样存储和查询。空间扩展功能还支持使用结构化查询语言（SQL）像一般数据库那样查找几何图形。空间查询和属性查询的结果还可以根据地理位置和属性进行组合。</span></p>
+<hr>
+<h4 id="1-9-3空间索引"><a href="#1-9-3空间索引" class="headerlink" title="1.9.3空间索引"></a><strong>1.9.3空间索引</strong></h4><p>空间索引主要用于查询和渲染操作的预过滤。空间过滤可以将数据进行分组，在系统进行实际查询操作之前经过简单的计算校验就能够过滤大量的数据记录，从而提高查询效率。</p>
+<hr>
+<h4 id="1-9-4元数据"><a href="#1-9-4元数据" class="headerlink" title="1.9.4元数据"></a><strong>1.9.4元数据</strong></h4><p>元数据关于数据的数据，因此，地理空间元数据是和地理空间数据集有关的数据，提供了追溯地理空间数据集源头很历史的能力，以及相关技术概要的信息。</p>
+<hr>
+<h4 id="1-9-5地图投影"><a href="#1-9-5地图投影" class="headerlink" title="1.9.5地图投影"></a><strong>1.9.5地图投影</strong></h4><p>投影方法的选取常常是转换精度误差的较小方案间的折中。投影通常是由包含超过40个参数的XML或文本文件构成，一般我们叫它WKT，其内容是投影算法定义。</p>
+<p>几乎所有数据格式都支持使用元数据定义投影信息，并将其放在文件头部。现代地理空间分析如那件能够对数据实现实时重投影。地图投影和大地基准面密切相关，大地基准是地球表面的一种模型，用来匹配地球中路径特征的坐标系统。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/19/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">python地理空间分析指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-python%E4%B8%8E%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">第一章 python与地理空间分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E4%B8%8E%E6%88%91%E4%BB%AC%E7%9A%84%E7%94%9F%E6%B4%BB"><span class="nav-number">2.1.</span> <span class="nav-text">1.1地理空间分析与我们的生活</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E7%9A%84%E5%8E%86%E5%8F%B2"><span class="nav-number">2.2.</span> <span class="nav-text">1.2地理空间分析的历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.3.</span> <span class="nav-text">1.3地理信息系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4%E9%81%A5%E6%84%9F"><span class="nav-number">2.4.</span> <span class="nav-text">1.4遥感</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5%E9%AB%98%E7%A8%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">2.5.</span> <span class="nav-text">1.5高程数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E5%88%B6%E5%9B%BE"><span class="nav-number">2.6.</span> <span class="nav-text">1.6计算机辅助制图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E5%92%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BC%96%E7%A8%8B"><span class="nav-number">2.7.</span> <span class="nav-text">1.7地理空间分析和计算机编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-1%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B"><span class="nav-number">2.7.1.</span> <span class="nav-text">1.7.1地理空间分析的面向对象编程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="nav-number">2.8.</span> <span class="nav-text">1.8地理空间分析的重要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9%E5%9C%B0%E7%90%86%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.9.</span> <span class="nav-text">1.9地理信息系统的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-1%E4%B8%93%E9%A2%98%E5%9C%B0%E5%9B%BE"><span class="nav-number">2.9.1.</span> <span class="nav-text">1.9.1专题地图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-2%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.9.2.</span> <span class="nav-text">1.9.2空间数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-3%E7%A9%BA%E9%97%B4%E7%B4%A2%E5%BC%95"><span class="nav-number">2.9.3.</span> <span class="nav-text">1.9.3空间索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-4%E5%85%83%E6%95%B0%E6%8D%AE"><span class="nav-number">2.9.4.</span> <span class="nav-text">1.9.4元数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-5%E5%9C%B0%E5%9B%BE%E6%8A%95%E5%BD%B1"><span class="nav-number">2.9.5.</span> <span class="nav-text">1.9.5地图投影</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Veritas Yv"
+      src="https://www.newton.com.tw/img/f/c45/nBnaugDNmhDOzUjNwgTYjV2NmJ2MzUGOkdTN4IjZiZ2M0MTN4MDMxMWN3M2LtVGdp9yYpB3LltWahJ2Lt92YuUHZpFmYuMmczdWbp9yL6MHc0RHa.jpg">
+  <p class="site-author-name" itemprop="name">Veritas Yv</p>
+  <div class="site-description" itemprop="description">Unus pro omnibus, omnes pro uno</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/veritas0505yg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;veritas0505yg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Veritas Yv</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
