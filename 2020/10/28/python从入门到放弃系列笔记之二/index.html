@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"veritas0505yg.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="python第一篇总结笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python从入门到放弃系列笔记之二">
+<meta property="og:url" content="https://veritas0505yg.github.io/2020/10/28/python%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%E7%B3%BB%E5%88%97%E7%AC%94%E8%AE%B0%E4%B9%8B%E4%BA%8C/index.html">
+<meta property="og:site_name" content="Veritas的部落格">
+<meta property="og:description" content="python第一篇总结笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-28T08:48:58.000Z">
+<meta property="article:modified_time" content="2020-10-30T09:02:29.751Z">
+<meta property="article:author" content="Veritas Yv">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://veritas0505yg.github.io/2020/10/28/python%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%E7%B3%BB%E5%88%97%E7%AC%94%E8%AE%B0%E4%B9%8B%E4%BA%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python从入门到放弃系列笔记之二 | Veritas的部落格</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Veritas的部落格</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Less is more</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home  //首页 fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user  //关于 fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  //标签 fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th   //分类 fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive //归档 fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="sitemap   //站点地图 fa-fw"></i>站点地图</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://veritas0505yg.github.io/2020/10/28/python%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%E7%B3%BB%E5%88%97%E7%AC%94%E8%AE%B0%E4%B9%8B%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.newton.com.tw/img/f/c45/nBnaugDNmhDOzUjNwgTYjV2NmJ2MzUGOkdTN4IjZiZ2M0MTN4MDMxMWN3M2LtVGdp9yYpB3LltWahJ2Lt92YuUHZpFmYuMmczdWbp9yL6MHc0RHa.jpg">
+      <meta itemprop="name" content="Veritas Yv">
+      <meta itemprop="description" content="Unus pro omnibus, omnes pro uno">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Veritas的部落格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python从入门到放弃系列笔记之二
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-28 16:48:58" itemprop="dateCreated datePublished" datetime="2020-10-28T16:48:58+08:00">2020-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-30 17:02:29" itemprop="dateModified" datetime="2020-10-30T17:02:29+08:00">2020-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">python第一篇总结笔记</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="python第二篇总结笔记"><a href="#python第二篇总结笔记" class="headerlink" title="python第二篇总结笔记"></a><strong>python第二篇总结笔记</strong></h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a><strong>字符串</strong></h3><p>字符串的本质是字符序列。python字符串是不可变的，无法对原字符串做任何修改，但可以将字符串的一部分复制到新创建的字符串，此外python不支持单字符类型，单字符也被作为一个字符串使用</p>
+<h4 id="字符串的编码"><a href="#字符串的编码" class="headerlink" title="字符串的编码"></a><strong>字符串的编码</strong></h4><p>python3默认Unicode16位的编码，ASCII码是Unicode的子集<br>**<em>使用内置函数ord()可以把字符转换成Unicode吗，使用内置chr()可将十进制转换成对应字符**</em></p>
+<h4 id="引号创建字符串"><a href="#引号创建字符串" class="headerlink" title="引号创建字符串"></a><strong>引号创建字符串</strong></h4><p>可使用单引号或双引号创建字符串，使用两种引号的好处可以创建本身就包含引号的字符串，而不用使用转义字符</p>
+<p>连续三个单引号或三个双引号，可帮助创建多行字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>resume=<span class="string">&#x27;&#x27;&#x27; name=&quot;gaoqi&quot;</span></span><br><span class="line"><span class="string">company=&quot;sxt&quot; age=18</span></span><br><span class="line"><span class="string">lover=&quot;Tom&quot;&#x27;&#x27;&#x27;</span></span><br><span class="line">&gt;&gt;&gt;print(resume)</span><br><span class="line"> name=<span class="string">&quot;gaoqi&quot;</span></span><br><span class="line">company=<span class="string">&quot;sxt&quot;</span> age=<span class="number">18</span></span><br><span class="line">lover=<span class="string">&quot;Tom&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="空字符串和len函数"><a href="#空字符串和len函数" class="headerlink" title="空字符串和len函数"></a><strong>空字符串和len函数</strong></h4><p>python允许空字符串存在，不包含任何字符且长度为0</p>
+<p>len()用于计算字符串中有多少字符</p>
+<h4 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a><strong>转义字符</strong></h4><p>通过转义字符，实现某种效果</p>
+<table>
+<thead>
+<tr>
+<th align="center">转义字符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">(在行尾时)</td>
+<td align="center">续行符</td>
+</tr>
+<tr>
+<td align="center">\</td>
+<td align="center">反斜杠符号</td>
+</tr>
+<tr>
+<td align="center">&#39;</td>
+<td align="center">单引号</td>
+</tr>
+<tr>
+<td align="center">&quot;</td>
+<td align="center">双引号</td>
+</tr>
+<tr>
+<td align="center">\b</td>
+<td align="center">退格</td>
+</tr>
+<tr>
+<td align="center">\n</td>
+<td align="center">换行</td>
+</tr>
+<tr>
+<td align="center">\t</td>
+<td align="center">横向制表符</td>
+</tr>
+<tr>
+<td align="center">\r</td>
+<td align="center">回车</td>
+</tr>
+</tbody></table>
+<h4 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a><strong>字符串拼接</strong></h4><p>原则</p>
+<ul>
+<li>两边是字符串，则拼接</li>
+<li>两边是数字则加法运算</li>
+<li>两边类型不同，抛出异常</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a=<span class="string">&#x27;sqt&#x27;</span><span class="string">&#x27;12345&#x27;</span></span><br><span class="line">&gt;&gt;&gt;a</span><br><span class="line"><span class="string">&#x27;sqt&#x27;</span><span class="string">&#x27;12345&#x27;</span></span><br><span class="line">&gt;&gt;&gt;a=<span class="string">&#x27;123&#x27;</span><span class="string">&quot;3456&quot;</span></span><br><span class="line">&gt;&gt;&gt;a</span><br><span class="line"><span class="number">1233456</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串成倍复制"><a href="#字符串成倍复制" class="headerlink" title="字符串成倍复制"></a><strong>字符串成倍复制</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a=<span class="string">&#x27;Srt&#x27;</span>*<span class="number">3</span></span><br><span class="line">&gt;&gt;&gt;a</span><br><span class="line"><span class="string">&#x27;SrtSrtSrt&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="不换行打印"><a href="#不换行打印" class="headerlink" title="不换行打印"></a><strong>不换行打印</strong></h4><p>前面调用print，会自动打印一个换行符，又是不想自动添加换行符，可通过参数end=“任意字符串”，实现末尾添加任何内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;print(<span class="string">&quot;sxt&quot;</span>,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">&gt;&gt;&gt;print(<span class="string">&quot;sxt&quot;</span>,end=<span class="string">&#x27;##&#x27;</span>)</span><br><span class="line">&gt;&gt;&gt;print(<span class="string">&quot;sxt&quot;</span>)</span><br><span class="line">sxt sxt<span class="comment">##sxt</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="从控制台获取字符串"><a href="#从控制台获取字符串" class="headerlink" title="从控制台获取字符串"></a><strong>从控制台获取字符串</strong></h4><p>使用input从控制台获取键盘输入的内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;myname=input(<span class="string">&quot;请输入姓名&quot;</span>)</span><br><span class="line">请输入姓名:<span class="number">123</span></span><br><span class="line">&gt;&gt;&gt;myname</span><br><span class="line"><span class="string">&#x27;123&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="str-实现其他数据类型转字符串"><a href="#str-实现其他数据类型转字符串" class="headerlink" title="str()实现其他数据类型转字符串"></a><strong>str()实现其他数据类型转字符串</strong></h4><p>str()实现其他数据类型转字符串,当调用print()函数时，解释器自动调用了str()将非字符串的对象转成了字符串</p>
+<h4 id="使用-提取字符"><a href="#使用-提取字符" class="headerlink" title="使用[]提取字符"></a><strong>使用[]提取字符</strong></h4><p>字符串本质是字符序列，可在字符串名后加[]，在[]中指定偏移量<br>正向搜索：<br>最左侧第一个字符偏移量为0，最右边一个字符为len(str)-1<br>反向搜索：<br>最右侧第一个字符偏移量是-1，最左边一个字符是-len(str)</p>
+<h4 id="replace-实现字符串替换"><a href="#replace-实现字符串替换" class="headerlink" title="replace()实现字符串替换"></a><strong>replace()实现字符串替换</strong></h4><p>有时需要替换字符串，只能通过创建新的字符串实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a=<span class="string">&#x27;abcccdef&#x27;</span></span><br><span class="line">&gt;&gt;&gt;a</span><br><span class="line"><span class="string">&#x27;abcdef&#x27;</span></span><br><span class="line">&gt;&gt;&gt;a.replace(<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;干&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;ab干干干def&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="slice切片操作"><a href="#slice切片操作" class="headerlink" title="slice切片操作"></a><strong>slice切片操作</strong></h4><p>帮助快速提取子字符串。标准格式为：</p>
+<p>[<strong><em>起始偏移量start:终止偏移量end:步长:step</em></strong>]</p>
+<p>典型操作(三个量皆为正数的情况)如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作和说明</th>
+<th align="center">示例</th>
+<th align="center">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">[:]提取整个字符串</td>
+<td align="center">“abcdef”[:]</td>
+<td align="center">“abcdef”</td>
+</tr>
+<tr>
+<td align="center">[start:]从start索引开始到结尾</td>
+<td align="center">“abcdef”[2:]</td>
+<td align="center">“cdef”</td>
+</tr>
+<tr>
+<td align="center">[:end]从头开始到end-1</td>
+<td align="center">“abcdef”[:2]</td>
+<td align="center">“ab”</td>
+</tr>
+<tr>
+<td align="center">[start:end]从start开始到end-1</td>
+<td align="center">“abcdef”[2:4]</td>
+<td align="center">“cd”</td>
+</tr>
+<tr>
+<td align="center">[start:end:step]从start开始到end-1</td>
+<td align="center">“abcdef”[1:5:2]</td>
+<td align="center">“bd”</td>
+</tr>
+</tbody></table>
+<p>其他操作（三个量为负数时）</p>
+<table>
+<thead>
+<tr>
+<th align="center">示例</th>
+<th align="center">说明</th>
+<th align="center">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">“abcdefgh”[-3:]</td>
+<td align="center">倒数三个</td>
+<td align="center">“fgh”</td>
+</tr>
+<tr>
+<td align="center">“abcdefgh”[-8:-3]</td>
+<td align="center">倒数第八个到倒数第三个(左包含右不包含)</td>
+<td align="center">“abcde”</td>
+</tr>
+<tr>
+<td align="center">“abcdefgh”[::-1]</td>
+<td align="center">步长为负，从右到左反向提取</td>
+<td align="center">“hgfedcba”</td>
+</tr>
+</tbody></table>
+<h4 id="split-分割和join-合并"><a href="#split-分割和join-合并" class="headerlink" title="split()分割和join()合并"></a><strong>split()分割和join()合并</strong></h4><p>split()基于指定分割符。将字符串分割成多个字符子串（存储到例表中）。如果不指定分割符，则默认使用空白字符（换行符/空格/制表符）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a=<span class="string">&quot;to be or not to be&quot;</span></span><br><span class="line">&gt;&gt;&gt;a.split()</span><br><span class="line">[<span class="string">&#x27;to&#x27;</span>,<span class="string">&#x27;be&#x27;</span>,<span class="string">&#x27;or&#x27;</span>,<span class="string">&#x27;not&#x27;</span>,<span class="string">&#x27;to&#x27;</span>,<span class="string">&#x27;be&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt;a.split(<span class="string">&#x27;be&#x27;</span>)</span><br><span class="line">[<span class="string">&#x27;to&#x27;</span>,<span class="string">&#x27;or not to&#x27;</span>,<span class="string">&#x27;&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>join()正好与split作用相反，用于将一系列子字符串连接起来</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a=[<span class="string">&#x27;to&#x27;</span>,<span class="string">&#x27;be&#x27;</span>,<span class="string">&#x27;or&#x27;</span>,<span class="string">&#x27;not&#x27;</span>,<span class="string">&#x27;to&#x27;</span>,<span class="string">&#x27;be&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt;<span class="string">&#x27;###&#x27;</span>.join(a)</span><br><span class="line">&gt;&gt;&gt;<span class="string">&#x27;to###be###or###not###to###be&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用拼接字符+，会生成新的字符串对象，因此不推荐使用+而是使用join函数</p>
+<h4 id="字符串比较和同一性"><a href="#字符串比较和同一性" class="headerlink" title="字符串比较和同一性"></a><strong>字符串比较和同一性</strong></h4><p>直接可以使用==，！=对字符串进行比较，是否有相同的字符</p>
+<p>使用is/not is，判断两个对象是否同一个对象，比较的是二者的地址，即id(obj1)是否等于id(obj2)</p>
+<h4 id="成员操作符"><a href="#成员操作符" class="headerlink" title="成员操作符"></a><strong>成员操作符</strong></h4><p>in/not in判断字符是否存在于字符串中</p>
+<h4 id="字符串驻留机制和字符串机制"><a href="#字符串驻留机制和字符串机制" class="headerlink" title="字符串驻留机制和字符串机制"></a><strong>字符串驻留机制和字符串机制</strong></h4><p>仅保存一份相且不可变字符串的方法，不同的值被存放在字符串驻留池中。python对于符合标识符规则的字符串（仅包含下划线(_)、字母和数字）</p>
+<h4 id="去除首尾信息"><a href="#去除首尾信息" class="headerlink" title="去除首尾信息"></a><strong>去除首尾信息</strong></h4><p>可以通过strip()去除字符串首尾指定信息。通过lstrip()去除字符串左边指定的信息，rstrip()去除字符串右边指定信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">&quot;*s*x*t*&quot;</span>.strip(<span class="string">&quot;*&quot;</span>)</span><br><span class="line"><span class="string">&#x27;s*x*t&#x27;</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">&quot;*s*x*t*&quot;</span>.lstrip(<span class="string">&quot;*&quot;</span>)</span><br><span class="line"><span class="string">&#x27;s*x*t*&#x27;</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">&quot;*s*x*t*&quot;</span>.rstrip(<span class="string">&quot;*&quot;</span>)</span><br><span class="line"><span class="string">&#x27;*s*x*t&#x27;</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">&quot;   sxt   &quot;</span>.strip()</span><br><span class="line"><span class="string">&#x27;sxt&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="大小写转化"><a href="#大小写转化" class="headerlink" title="大小写转化"></a><strong>大小写转化</strong></h4><table>
+<thead>
+<tr>
+<th align="center">示例</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">a.capitalize()</td>
+<td align="center">产生新的字符串，首字母大写</td>
+</tr>
+<tr>
+<td align="center">a.title()</td>
+<td align="center">产生新的字符串，每个单词的首个字母都大写</td>
+</tr>
+<tr>
+<td align="center">a.upper()</td>
+<td align="center">产生新的字符串，所有字符全都转化成大写</td>
+</tr>
+<tr>
+<td align="center">a.lower()</td>
+<td align="center">产生新的字符串，所有字符全都转化成小写</td>
+</tr>
+<tr>
+<td align="center">a.swapcase()</td>
+<td align="center">产生新的，所有字母大小写互换</td>
+</tr>
+</tbody></table>
+<h4 id="格式排版"><a href="#格式排版" class="headerlink" title="格式排版"></a><strong>格式排版</strong></h4><p>center()、ljust()、rjust()这三个函数用于对字符串实现排版。示例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a=<span class="string">&quot;SXT&quot;</span></span><br><span class="line">&gt;&gt;&gt;a.center(<span class="number">10</span>,<span class="string">&quot;*&quot;</span>)</span><br><span class="line"><span class="string">&#x27;***SXT****&#x27;</span></span><br><span class="line">&gt;&gt;&gt;a.center(<span class="number">10</span>)</span><br><span class="line"><span class="string">&#x27;   SXT    &#x27;</span></span><br><span class="line">&gt;&gt;&gt;a.ljust(<span class="number">10</span>,<span class="string">&quot;*&quot;</span>)</span><br><span class="line"><span class="string">&#x27;SXT*******&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串的格式化"><a href="#字符串的格式化" class="headerlink" title="字符串的格式化"></a><strong>字符串的格式化</strong></h4><p>format()基本用法<br>str.format()通过{}和:代替以前的%<br>format函数可以接受无限个参数，位置可以不按顺序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;b=<span class="string">&quot;名字是：&#123;0&#125;，年龄是：&#123;1&#125;。&#123;0&#125;是个好小伙&quot;</span></span><br><span class="line">&gt;&gt;&gt;b.format(<span class="string">&quot;高崎&quot;</span>,<span class="number">18</span>)</span><br><span class="line"><span class="string">&#x27;名字是：高崎，年龄是：18。高崎是个好小伙&#x27;</span></span><br><span class="line">&gt;&gt;&gt;c=<span class="string">&quot;名字是&#123;name&#125;,年龄是&#123;age&#125;&quot;</span></span><br><span class="line">&gt;&gt;&gt;c.format(age=<span class="number">19</span>,name=<span class="string">&#x27;高崎&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;名字是高崎,年龄是19&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="填充与对齐"><a href="#填充与对齐" class="headerlink" title="填充与对齐"></a><strong>填充与对齐</strong></h4><p>填充与对齐常一齐使用<br>^、&lt;、&gt;分别是居中、左对齐、右对齐，后面带宽度<br>:号后面带填充的字符，只能是一个字符，不指定的话默认是用空格填充</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">&quot;&#123;:*&gt;8&#125;&quot;</span>.format(<span class="string">&quot;245&quot;</span>)</span><br><span class="line"><span class="string">&#x27;*****245&#x27;</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">&quot;我是&#123;0&#125;，我喜欢数字&#123;1:*^8&#125;&quot;</span>.format(<span class="string">&quot;高崎&quot;</span>,<span class="string">&quot;666&quot;</span>)</span><br><span class="line"><span class="string">&#x27;我是高崎，我喜欢数字**666***&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="数字格式化"><a href="#数字格式化" class="headerlink" title="数字格式化"></a><strong>数字格式化</strong></h4><table>
+<thead>
+<tr>
+<th align="center">数字</th>
+<th align="center">格式</th>
+<th align="center">输出</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">3.1415926</td>
+<td align="center">{:.2f}</td>
+<td align="center">3.14</td>
+<td align="center">保留小数点后两位</td>
+</tr>
+<tr>
+<td align="center">3.1415926</td>
+<td align="center">{:+.2f}</td>
+<td align="center">3.14</td>
+<td align="center">保留小数点后两位</td>
+</tr>
+<tr>
+<td align="center">3.1415926</td>
+<td align="center">{:.0f}</td>
+<td align="center">3</td>
+<td align="center">不带小数</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">{:0&gt;2d}</td>
+<td align="center">05</td>
+<td align="center">数字补零（右对齐，宽为2）</td>
+</tr>
+<tr>
+<td align="center">1000000</td>
+<td align="center">{:,}</td>
+<td align="center">1,000,000</td>
+<td align="center">逢千分割</td>
+</tr>
+<tr>
+<td align="center">0.25</td>
+<td align="center">{:.2%}</td>
+<td align="center">25.00%</td>
+<td align="center">百分比格式</td>
+</tr>
+</tbody></table>
+<h4 id="可变字符串"><a href="#可变字符串" class="headerlink" title="可变字符串"></a><strong>可变字符串</strong></h4><p>有时我们需要修改原字符串对象，可以使用io.StringIO对象或array对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">import</span> io</span><br><span class="line">&gt;&gt;&gt;s=<span class="string">&quot;hello,sxt&quot;</span></span><br><span class="line">&gt;&gt;&gt;sio=io.StringIO(s)</span><br><span class="line">&gt;&gt;&gt;sio</span><br><span class="line">&lt;_io.StringIO object at <span class="number">0x02F462B0</span>&gt;</span><br><span class="line">&gt;&gt;&gt;sio.getvalue()</span><br><span class="line"><span class="string">&#x27;hello,sxt&#x27;</span></span><br><span class="line">&gt;&gt;&gt;sio.seek(<span class="number">7</span>)</span><br><span class="line"><span class="number">7</span></span><br><span class="line">&gt;&gt;&gt;sio.write(<span class="string">&quot;g&quot;</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line">&gt;&gt;&gt;sio.getvalue()</span><br><span class="line"><span class="string">&#x27;hello,gxt&#x27;</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/22/Geoprocessing-with-Python-notes-of-Chapter2/" rel="prev" title="Geoprocessing with Python notes of Chapter2">
+      <i class="fa fa-chevron-left"></i> Geoprocessing with Python notes of Chapter2
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E7%AC%AC%E4%BA%8C%E7%AF%87%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">python第二篇总结笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.1.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E7%BC%96%E7%A0%81"><span class="nav-number">1.1.1.</span> <span class="nav-text">字符串的编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%8F%B7%E5%88%9B%E5%BB%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.1.2.</span> <span class="nav-text">引号创建字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8Clen%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.3.</span> <span class="nav-text">空字符串和len函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="nav-number">1.1.4.</span> <span class="nav-text">转义字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5"><span class="nav-number">1.1.5.</span> <span class="nav-text">字符串拼接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%90%E5%80%8D%E5%A4%8D%E5%88%B6"><span class="nav-number">1.1.6.</span> <span class="nav-text">字符串成倍复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E6%8D%A2%E8%A1%8C%E6%89%93%E5%8D%B0"><span class="nav-number">1.1.7.</span> <span class="nav-text">不换行打印</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.1.8.</span> <span class="nav-text">从控制台获取字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#str-%E5%AE%9E%E7%8E%B0%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.1.9.</span> <span class="nav-text">str()实现其他数据类型转字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-%E6%8F%90%E5%8F%96%E5%AD%97%E7%AC%A6"><span class="nav-number">1.1.10.</span> <span class="nav-text">使用[]提取字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#replace-%E5%AE%9E%E7%8E%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9B%BF%E6%8D%A2"><span class="nav-number">1.1.11.</span> <span class="nav-text">replace()实现字符串替换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#slice%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.12.</span> <span class="nav-text">slice切片操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#split-%E5%88%86%E5%89%B2%E5%92%8Cjoin-%E5%90%88%E5%B9%B6"><span class="nav-number">1.1.13.</span> <span class="nav-text">split()分割和join()合并</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%92%8C%E5%90%8C%E4%B8%80%E6%80%A7"><span class="nav-number">1.1.14.</span> <span class="nav-text">字符串比较和同一性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%88%90%E5%91%98%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">1.1.15.</span> <span class="nav-text">成员操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%A9%BB%E7%95%99%E6%9C%BA%E5%88%B6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9C%BA%E5%88%B6"><span class="nav-number">1.1.16.</span> <span class="nav-text">字符串驻留机制和字符串机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E9%99%A4%E9%A6%96%E5%B0%BE%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.17.</span> <span class="nav-text">去除首尾信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E5%8C%96"><span class="nav-number">1.1.18.</span> <span class="nav-text">大小写转化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E6%8E%92%E7%89%88"><span class="nav-number">1.1.19.</span> <span class="nav-text">格式排版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">1.1.20.</span> <span class="nav-text">字符串的格式化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A1%AB%E5%85%85%E4%B8%8E%E5%AF%B9%E9%BD%90"><span class="nav-number">1.1.21.</span> <span class="nav-text">填充与对齐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">1.1.22.</span> <span class="nav-text">数字格式化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.1.23.</span> <span class="nav-text">可变字符串</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Veritas Yv"
+      src="https://www.newton.com.tw/img/f/c45/nBnaugDNmhDOzUjNwgTYjV2NmJ2MzUGOkdTN4IjZiZ2M0MTN4MDMxMWN3M2LtVGdp9yYpB3LltWahJ2Lt92YuUHZpFmYuMmczdWbp9yL6MHc0RHa.jpg">
+  <p class="site-author-name" itemprop="name">Veritas Yv</p>
+  <div class="site-description" itemprop="description">Unus pro omnibus, omnes pro uno</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/veritas0505yg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;veritas0505yg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Veritas Yv</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
